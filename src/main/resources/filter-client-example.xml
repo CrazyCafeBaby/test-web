@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sofa="http://sofastack.io/schema/sofaboot"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd"
+       default-autowire="byName">
+    <!-- filter -->
+    <bean id="rpcClient" class="com.example.integration.impl.RpcClientImpl"/>
+    <sofa:service ref="rpcClient" interface="com.example.integration.RpcClient">
+        <sofa:binding.jvm/>
+    </sofa:service>
+
+    <sofa:reference jvm-first="false" id="testApi" interface="com.example.server.api.TestApi">
+        <sofa:binding.bolt/>
+    </sofa:reference>
+
+    <bean id="controller" class="com.example.web.Controller">
+        <property name="rpcClient" ref="rpcClient"/>
+    </bean>
+
+    <bean id="messageDao" class="com.example.dal.dao.impl.MessageDaoImpl"/>
+    <sofa:service ref="messageDao" interface="com.example.dal.dao.MessageDao">
+        <sofa:binding.jvm/>
+    </sofa:service>
+
+    <bean id="defaultConsumerListener" class="com.example.mq.listener.DefaultConsumerListener"/>
+
+    <bean id="mqConsumerProperties" class="com.example.mq.properties.MqConsumerProperties"/>
+
+    <bean id="testHandler" class="com.example.mq.handler.TestHandler"/>
+</beans>

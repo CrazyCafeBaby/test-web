@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
+/**
+ * datasource配置
+ */
 @Component
 @EnableTransactionManagement
 public class DataSourceConfig {

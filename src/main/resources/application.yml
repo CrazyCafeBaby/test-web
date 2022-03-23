@@ -6,9 +6,26 @@ rocketmq:
     namesrvAddr: 172.31.38.111:9876
     group: TEST_TOPIC
 
+logging:
+  path: ./logs
+  level:
+    com:
+      example:
+        test: INFO
+
+com:
+  alipay:
+    sofa:
+      rpc:
+        registry:
+          address: sofa://172.31.33.46:9603
 
 spring:
-
+  output:
+    ansi:
+      enable: ALWAYS
+  application:
+    name: test
   # mysql-druid
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource

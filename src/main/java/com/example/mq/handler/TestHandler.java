@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * 消息处理器
+ */
 public class TestHandler extends AbstractConsumerServiceImpl {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TestHandler.class);
@@ -14,6 +17,9 @@ public class TestHandler extends AbstractConsumerServiceImpl {
     @Autowired
     private MessageDao messageDao;
 
+    /**
+     * 消息处理
+     */
     @Override
     public ConsumeConcurrentlyStatus handle(String msg) {
         LOGGER.info("mq消息处理开始, message:{}", msg);

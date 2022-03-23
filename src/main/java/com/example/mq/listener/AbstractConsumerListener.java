@@ -14,6 +14,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+/**
+ * 抽象消息监听器
+ */
 @Configuration
 public abstract class AbstractConsumerListener {
 
@@ -22,6 +25,9 @@ public abstract class AbstractConsumerListener {
     @Autowired
     private MqConsumerProperties consumerProperties;
 
+    /**
+     * 开启消息监听
+     */
     public void listener(String topic, String tags) throws MQClientException {
 
         LOGGER.info("开启" + topic + ": " + tags + "消费监听");

@@ -2,6 +2,9 @@ package com.example.mdo;
 
 import java.util.Date;
 
+/**
+ * 消息do类
+ */
 public class MsgDO {
 
     private long id;

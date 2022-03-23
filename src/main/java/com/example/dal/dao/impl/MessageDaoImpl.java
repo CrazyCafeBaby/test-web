@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 消息dao实现类
+ */
 @Component
 public class MessageDaoImpl implements MessageDao {
 
@@ -31,6 +34,9 @@ public class MessageDaoImpl implements MessageDao {
     @Autowired
     private DataSource dataSource;
 
+    /***
+     * @see MessageDao#insertMsg(String)
+     */
     public void insertMsg(String msg) throws SQLException {
         LOGGER.info("数据库开始");
         Connection connection = dataSource.getConnection();
@@ -42,12 +48,11 @@ public class MessageDaoImpl implements MessageDao {
         ));
 
         connection.close();
-//        String sql = "INSERT INTO msg_detail (msg) VALUES (:msg)";
-//        Map<String ,Object> param = new HashMap<String, Object>();
-//        param.put("msg", msg);
-//        jdbcTemplate.update(sql, param);
     }
 
+    /**
+     * @see MessageDao#selectLast3()
+     */
     public List<MsgDO> selectLast3()  throws SQLException {
         LOGGER.info("数据库查询开始");
         String sql = "SELECT id,gmt_create,gmt_modified,msg from msg_detail order by id desc limit 3";
@@ -62,34 +67,5 @@ public class MessageDaoImpl implements MessageDao {
                 return msgDO;
             }
         });
-
-
-//
-//
-//        Connection connection = dataSource.getConnection();
-//
-//        Statement statement = connection.createStatement();
-//
-//        ResultSet resultSet = statement.executeQuery( "SELECT id,gmt_create,gmt_modified,msg from msg_detail order by id desc limit 3");
-//
-//        LOGGER.info("数据库结束," + resultSet.toString());
-//        List<MsgDO> msgDOS = Lists.newArrayList();
-//        while (resultSet.next()) {
-//            MsgDO msgDO = new MsgDO();
-//            msgDO.setId(resultSet.getLong("id"));
-//            msgDO.setMsg(resultSet.getString("msg"));
-//            msgDO.setGmtCreate(resultSet.getDate("gmt_create"));
-//            msgDO.setGmtModified(resultSet.getDate("gmt_modified"));
-//            msgDOS.add(msgDO);
-//        }
-//        return msgDOS;
-//        return null;
-    }
-
-    public static class MsgDOMapper implements RowMapper<MsgDO> {
-
-        public MsgDO mapRow(ResultSet resultSet, int i) throws SQLException {
-            return null;
-        }
     }
 }

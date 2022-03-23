@@ -3,16 +3,15 @@ package com.example.web;
 import com.alibaba.fastjson.JSON;
 import com.example.dal.dao.MessageDao;
 import com.example.integration.RpcClient;
-import com.example.mdo.MsgDO;
-import com.google.common.collect.Lists;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
+/**
+ * 测试controller层，提供http接口测试
+ */
 @RestController
 public class Controller {
 
@@ -22,6 +21,9 @@ public class Controller {
 
     private MessageDao messageDao;
 
+    /**
+     * 发送消息的http接口
+     */
     @RequestMapping("/message/send")
     public String create(@RequestParam("msg") String msg) {
         rpcClient.sendMessage(msg);
@@ -29,6 +31,9 @@ public class Controller {
         return "send msg [" + msg + "], success";
     }
 
+    /**
+     * 查询最近三次新增消息的接口
+     */
     @RequestMapping("/message/get")
     public String get() {
         try {

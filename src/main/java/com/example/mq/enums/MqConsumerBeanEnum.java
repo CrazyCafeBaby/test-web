@@ -1,5 +1,8 @@
 package com.example.mq.enums;
 
+/**
+ * 消息处理器枚举
+ */
 public enum MqConsumerBeanEnum {
 
     TEST("TEST_TOPIC:tag", "testHandler");

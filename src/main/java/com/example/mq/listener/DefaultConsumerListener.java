@@ -17,6 +17,9 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 默认消息监听器
+ */
 @Configuration
 public class DefaultConsumerListener extends AbstractConsumerListener implements ApplicationContextAware, ApplicationListener<ContextRefreshedEvent> {
 
@@ -24,6 +27,9 @@ public class DefaultConsumerListener extends AbstractConsumerListener implements
 
     private ApplicationContext applicationContext;
 
+    /**
+     * 消息处理
+     */
     @Override
     public ConsumeConcurrentlyStatus onMessage(List<MessageExt> msgs) {
         for (MessageExt msg : msgs) {
@@ -61,7 +67,9 @@ public class DefaultConsumerListener extends AbstractConsumerListener implements
         this.applicationContext = applicationContext;
     }
 
-
+    /**
+     * 开启消息监听
+     */
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         try {
             super.listener("TEST_TOPIC", "tag");

@@ -33,7 +33,7 @@ public abstract class AbstractConsumerListener {
         LOGGER.info("开启" + topic + ": " + tags + "消费监听");
 
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("TEST_TOPIC");
-        consumer.setNamesrvAddr("172.31.38.111:9876");
+        consumer.setNamesrvAddr(consumerProperties.getNamesrvAddr());
         consumer.subscribe(topic, tags);
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
